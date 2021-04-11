@@ -153,15 +153,16 @@ const SignUpPage = (props) => {
         {props.error.msg ? (
           <div className={classes.errorMsg}>{props.error.msg.msg}</div>
         ) : null}
+
         <Formik
           initialValues={{
             department: "",
             roles: "",
             regdId: "",
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
+            name: props.formData ? props.formData.name : "",
+            email: props.formData ? props.formData.email : "",
+            password: props.formData ? props.formData.name : "",
+            confirmPassword: props.formData ? props.formData.name : "",
             currentSemester: "",
           }}
           validationSchema={Yup.object({
@@ -240,6 +241,13 @@ const SignUpPage = (props) => {
                 type="text"
                 id="name"
                 className={classes.input}
+                disabled={
+                  props.formData !== undefined
+                    ? props.formData.name !== ""
+                      ? true
+                      : false
+                    : false
+                }
               />
               {formik.touched.name && formik.errors.name ? (
                 <div>{formik.errors.name}</div>
@@ -260,6 +268,13 @@ const SignUpPage = (props) => {
                 type="email"
                 id="email"
                 className={classes.input}
+                disabled={
+                  props.formData !== undefined
+                    ? props.formData.email !== ""
+                      ? true
+                      : false
+                    : ""
+                }
               />
               {formik.touched.email && formik.errors.email ? (
                 <div>{formik.errors.email}</div>
@@ -270,6 +285,20 @@ const SignUpPage = (props) => {
                 type="password"
                 id="password"
                 className={classes.input}
+                hidden={
+                  props.formData !== undefined
+                    ? props.formData.password !== ""
+                      ? true
+                      : false
+                    : ""
+                }
+                disabled={
+                  props.formData !== undefined
+                    ? props.formData.password !== ""
+                      ? true
+                      : false
+                    : ""
+                }
               />
               {formik.touched.password && formik.errors.password ? (
                 <div>{formik.errors.password}</div>
@@ -280,6 +309,20 @@ const SignUpPage = (props) => {
                 type="password"
                 id="confirmPassword"
                 className={classes.input}
+                hidden={
+                  props.formData !== undefined
+                    ? props.formData.password !== ""
+                      ? true
+                      : false
+                    : ""
+                }
+                disabled={
+                  props.formData !== undefined
+                    ? props.formData.password !== ""
+                      ? true
+                      : false
+                    : ""
+                }
               />
               {formik.touched.confirmPassword &&
               formik.errors.confirmPassword ? (
